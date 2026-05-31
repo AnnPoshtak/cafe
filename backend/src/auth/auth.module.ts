@@ -3,9 +3,10 @@ import { AuthService } from './auth.service';
 import { PassportAuthController } from './passport-auth.controller';
 import { UsersModule } from '../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
-import { LocalStrategy } from './strategies/local.strategy'; // твоя локальна стратегія
-import { JwtStrategy } from './strategies/jwt.strategy';     // твоя JWT стратегія
+import { LocalStrategy } from './strategies/local.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy'; 
 import { GoogleStrategy } from './strategies/google.strategy';
+import { RefreshJwtStrategy } from './strategies/refresh-jwt.strategy';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { GoogleStrategy } from './strategies/google.strategy';
     AuthService, 
     LocalStrategy, 
     JwtStrategy, 
-    GoogleStrategy 
+    GoogleStrategy,
+    RefreshJwtStrategy
   ],
 })
 export class AuthModule {}

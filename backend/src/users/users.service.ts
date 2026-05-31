@@ -51,4 +51,14 @@ export class UsersService {
     return user;
   }
 
+  async setCurrentRefreshToken(userId: number, refreshToken: string) {
+    const salt = await bcrypt.genSalt(10);
+    const hashedRefreshToken = await bcrypt.hash(refreshToken, salt);
+    
+    await this.usersRepo.update(userId, { hashedRefreshToken });
+  }
+
+  async removeRefreshToken(userId: number) {
+    await this.usersRepo.update(userId, { hashedRefreshToken: undefined });
+  }
 }

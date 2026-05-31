@@ -5,6 +5,7 @@ import { PassportJwtAuthGuard } from "./guards/passport-jwt.guard";
 import { GoogleAuthGuard } from "./guards/google-auth.guard";
 import { CreateAuthDto } from "./dto/create-auth.dto";
 import { Public } from "./decorators/public.decorator";
+import { PassportRefreshGuard } from "./guards/passport-refresh.guard";
 
 @Controller('auth')
 export class PassportAuthController {
@@ -42,8 +43,23 @@ export class PassportAuthController {
         const authResult = await this.authService.signIn(req.user);
 
         const frontendUrl = `${process.env.FRONTEND_URL}/oauth-success?token=${authResult.accessToken}`;
-        
+
         return res.redirect(frontendUrl);
+    }
+
+    @Public()
+    @UseGuards(PassportRefreshGuard)
+    @Post('refresh')
+    async refresh(@Request() req: any) {
+        const userId = req.user.id;
+        const refreshToken = req.user.refreshToken;
+        return this.authService.refreshTokens(userId, refreshToken);
+    }
+
+    @UseGuards(PassportJwtAuthGuard)
+    @Post('logout')
+    async logout(@Request() req: any) {
+        return this.authService.logout(req.user.sub || req.user.id);
     }
 
 }
