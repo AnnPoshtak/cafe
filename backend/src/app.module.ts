@@ -9,6 +9,8 @@ import { LoggerMiddleware } from './logger.middleware';
 import { dataSourceOptions } from './data-source';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { MenuModule } from './menu/menu.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { AuthModule } from './auth/auth.module';
     }),
     UsersModule,
     AuthModule,
+    MenuModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
