@@ -11,6 +11,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { MenuModule } from './menu/menu.module';
 import { CategoryModule } from './category/category.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CategoryModule } from './category/category.module';
     AuthModule,
     MenuModule,
     CategoryModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
