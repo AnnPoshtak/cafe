@@ -1,6 +1,7 @@
 import {
   Controller, Get, Post, Body, Patch, Param, Delete, Query,
-  UseInterceptors, UploadedFile, BadRequestException
+  UseInterceptors, UploadedFile, BadRequestException,
+  UseGuards
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -8,11 +9,16 @@ import { extname } from 'path';
 import { MenuService } from './menu.service';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Public } from 'src/auth/decorators/public.decorator';
 
+@UseGuards(RolesGuard)
 @Controller('menu')
 export class MenuController {
   constructor(private readonly menuService: MenuService) { }
 
+  @Roles('admin')
   @Post()
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
@@ -38,16 +44,19 @@ export class MenuController {
     return this.menuService.create(createMenuDto, imageName || undefined);
   }
 
+  @Public()
   @Get()
   findAll(@Query('category') categorySlug?: string) {
     return this.menuService.findAll(categorySlug);
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.menuService.findOne(+id);
   }
 
+  @Roles('admin')
   @Patch(':id')
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
@@ -67,6 +76,7 @@ export class MenuController {
     return this.menuService.update(+id, updateMenuDto, imageName || undefined);
   }
 
+  @Roles('admin')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.menuService.remove(+id);
