@@ -1,6 +1,3 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import { 
   ArrowRight, 
   Plane, 
@@ -15,6 +12,7 @@ import {
 } from "lucide-react";
 import Header from "./components/Header";
 import TeamPhotos from "./components/TeamPhotos";
+import MenuButton from "./components/MenuButton";
 
 export default function Home() {
 
@@ -78,15 +76,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="pt-4">
-            <button className="group relative bg-[#0077B6] text-white px-10 py-4 rounded-full font-semibold shadow-lg shadow-[#0077B6]/20 hover:bg-[#005B8C] hover:shadow-xl hover:shadow-[#005B8C]/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 overflow-hidden">
-              <span className="relative z-10 flex items-center gap-2">
-                Відкрити дзен-меню 
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 transition-transform duration-1000" />
-            </button>
-          </div>
+          <MenuButton />
         </section>
 
         <section className="relative group">
@@ -139,7 +129,7 @@ export default function Home() {
               Команда MindKey — це не просто персонал. Це провідники у світ внутрішнього спокою та смаку.
             </p>
           </div>
-
+          
           <TeamPhotos />
 
           <div className="grid md:grid-cols-3 gap-8">
