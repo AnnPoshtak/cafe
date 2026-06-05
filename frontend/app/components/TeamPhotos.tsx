@@ -30,15 +30,19 @@ export default function TeamPhotos() {
   };
 
   return (
-    <div className="relative">
-      <main className="relative z-10 max-w-6xl mx-auto px-6 py-16 space-y-16">
+    <div>
+      <main className="relative z-10 max-w-6xl mx-auto px-6 py-16">
         <section className="space-y-8">
-          <h2 className="text-3xl font-bold text-[#003459]">Наша Команда</h2>
-          <p className="text-lg text-[#003459]/80 max-w-2xl">
-            У MindKey ми не просто заварюємо чай та каву — ми створюємо атмосферу, де кожен може знайти свій ритм і зарядитися енергією для продуктивної роботи. Наша команда — це поєднання чайних сомельє, техно-бариста та амбасадорів дзену, які разом створюють унікальний простір для вашого фокусу.
-          </p>
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold text-[#003459] text-center mx-auto">
+              Наша Команда
+            </h2>
+            <p className="text-lg text-[#003459]/80 max-w-2xl text-center mx-auto">
+              У MindKey ми не просто заварюємо чай та каву — ми створюємо атмосферу, де кожен може знайти свій ритм і зарядитися енергією для продуктивної роботи. Наша команда — це поєднання чайних сомельє, техно-бариста та амбасадорів дзену, які разом створюють унікальний простір для вашого фокусу.
+            </p>
+          </div>
           
-          <div className="relative group rounded-3xl overflow-hidden shadow-2xl border border-white aspect-[16/10] md:aspect-[16/9] max-h-[520px]">
+          <div className="relative group rounded-3xl overflow-hidden shadow-2xl border border-white aspect-[16/10] md:aspect-[16/9] max-h-[520px] mx-auto">
             <div className="relative w-full h-full bg-slate-900">
               {teamSlides.map((slide, index) => (
                 <div
