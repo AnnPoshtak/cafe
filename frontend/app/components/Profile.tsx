@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { User, ChevronDown, LogOut, Sparkles, Mail } from 'lucide-react';
+import { User, ChevronDown, LogOut, Sparkles, Mail} from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import instance from '../api/request'; 
+import instance from '../api/request';
+import Link  from "next/link";
 
 interface UserProfile {
   id: number;
@@ -66,7 +67,7 @@ export const ProfileDropdown = () => {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('userId');
-      
+
       setUser(null);
       setIsOpen(false);
     }
@@ -82,22 +83,22 @@ export const ProfileDropdown = () => {
 
   return (
     <div className="relative inline-block font-sans text-[#003459]">
-      
-      <button 
+
+      <button
         onClick={toggleDropdown}
         className={`flex items-center gap-2 px-5 py-2.5 rounded-xl border transition-all duration-300 text-xs font-semibold tracking-wider uppercase backdrop-blur-md shadow-md
-          ${isOpen 
-            ? 'border-[#0077B6]/30 bg-white/80 text-[#0077B6]' 
+          ${isOpen
+            ? 'border-[#0077B6]/30 bg-white/80 text-[#0077B6]'
             : 'border-[#BBC2E2]/45 bg-white/40 hover:bg-white/80 hover:border-[#0077B6]/30'
           }`}
       >
         <User size={15} className="stroke-[2.5]" />
         <span className="tracking-wide">{user ? 'Мій Дзен' : 'Увійти'}</span>
         {user && (
-          <ChevronDown 
-            size={13} 
+          <ChevronDown
+            size={13}
             className={`stroke-[2.5] transition-transform duration-300 opacity-70 
-              ${isOpen ? 'rotate-180' : 'rotate-0'}`} 
+              ${isOpen ? 'rotate-180' : 'rotate-0'}`}
           />
         )}
       </button>
@@ -112,7 +113,7 @@ export const ProfileDropdown = () => {
                   {user.role}
                 </span>
               </div>
-              
+
               <div className="text-[10px] font-bold text-[#005B8C]/50 tracking-wider uppercase mb-0.5">
                 Ви увійшли як:
               </div>
@@ -121,10 +122,20 @@ export const ProfileDropdown = () => {
                 <span className="truncate">{user.email}</span>
               </div>
             </div>
-            
+
             <div className="h-[1px] bg-[#BBC2E2]/30 my-1" />
-            
-            <button 
+
+            {(user.role === 'admin' || user.role === 'barista') && (
+              <button className="w-full p-2.5 text-xs font-semibold tracking-wider uppercase text-[#003459] border border-[#003459]/20 bg-[#003459]/10 rounded-xl transition-all duration-200 hover:bg-[#003459]/20 hover:border-[#003459]/40">
+                <Link href="/control-panel">
+                  <span className="text-sm font-medium text-[#003459] tracking-wide">
+                    Панель керування
+                  </span>
+                </Link>
+              </button>
+            )}
+
+            <button
               onClick={handleLogout}
               className="flex items-center justify-center gap-2 w-full p-2.5 text-xs font-semibold tracking-wider uppercase text-red-600 border border-red-200 bg-red-50/50 rounded-xl cursor-pointer transition-all duration-200 hover:bg-red-50 hover:border-red-300"
             >

@@ -19,6 +19,7 @@ export default function OAuthSuccessPage() {
                 const userId = payload.sub;
 
                 localStorage.setItem("accessToken", accessToken);
+                localStorage.setItem("refreshToken", payload.refreshToken);
                 if (userId) {
                     localStorage.setItem("userId", userId.toString());
                 }
